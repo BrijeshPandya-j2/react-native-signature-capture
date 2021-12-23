@@ -21,6 +21,8 @@
 	BOOL _showTitleLabel;
 	UIColor *_backgroundColor;
 	UIColor *_strokeColor;
+	NSString *_viewMode;
+
 }
 
 @synthesize sign;
@@ -74,7 +76,7 @@
 
 		[self addSubview:sign];
 
-		if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+		if ( [_viewMode  isEqual: @"portrait"] || UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
 
 			if (_showTitleLabel) {
 				titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 24)];
@@ -163,6 +165,9 @@
 	_loaded = true;
 	_border.path = _showBorder ? [UIBezierPath bezierPathWithRect:self.bounds].CGPath : nil;
 	_border.frame = self.bounds;
+}
+- (void)setViewMode:(NSString *)viewMode {
+    _viewMode = viewMode;
 }
 
 - (void)setRotateClockwise:(BOOL)rotateClockwise {
